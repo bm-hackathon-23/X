@@ -236,6 +236,9 @@ X.parserTRK.prototype.parse = function(container, object, data, flag) {
 
   } // end of loop through all tracks
 
+  // bounding box of the whole .trk file in world space coordinate 
+  object._bbox = [minX, maxX, minY, maxY, minZ, maxZ];
+  
   // calculate the center based on the bounding box of the whole .trk file
   var centerX = (minX + maxX) / 2;
   var centerY = (minY + maxY) / 2;

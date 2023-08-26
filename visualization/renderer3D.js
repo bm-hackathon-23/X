@@ -1615,6 +1615,12 @@ X.renderer3D.prototype.render_ = function(picking, invoked) {
       .get(X.shaders.uniforms.SCALARSMINTHRESHOLD);
   var uScalarsMaxThreshold = uLocations
       .get(X.shaders.uniforms.SCALARSMAXTHRESHOLD);
+
+  var uUseCuboidCropping = uLocations.get(X.shaders.uniforms.USECUBOIDCROPPING);
+  var uCropX = uLocations.get(X.shaders.uniforms.CROPX);
+  var uCropY = uLocations.get(X.shaders.uniforms.CROPY);
+  var uCropZ = uLocations.get(X.shaders.uniforms.CROPZ);
+        
   var uObjectOpacity = uLocations.get(X.shaders.uniforms.OBJECTOPACITY);
   var uLabelMapOpacity = uLocations.get(X.shaders.uniforms.LABELMAPOPACITY);
   var uLabelMapColor = uLocations.get(X.shaders.uniforms.LABELMAPCOLOR);
@@ -1820,6 +1826,16 @@ X.renderer3D.prototype.render_ = function(picking, invoked) {
         this._context.vertexAttribPointer(aScalar, vertexBuffer._itemSize,
             this._context.FLOAT, false, 0, 0);
 
+      }
+
+      if (object.useCuboidCropping) {
+        // activate the useCuboidCropping flag on the shader
+        this._context.uniform1i(uUseCuboidCropping, true);
+        this._context.uniform2f(uCropX, object.crop.xMin, object.crop.xMax);
+        this._context.uniform2f(uCropY, object.crop.yMin, object.crop.yMax);
+        this._context.uniform2f(uCropZ, object.crop.zMin, object.crop.zMax);
+      } else {
+        this._context.uniform1i(uUseCuboidCropping, false);
       }
 
       // OPACITY

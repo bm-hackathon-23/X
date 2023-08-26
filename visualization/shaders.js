@@ -77,6 +77,12 @@ X.shaders = function() {
   t += 'uniform mat4 objectTransform;\n';
   t += 'uniform bool useObjectColor;\n';
   t += 'uniform bool useScalars;\n';
+  
+  t += 'uniform bool useCuboidCropping;\n';
+  t += 'uniform vec2 cropX;\n';
+  t += 'uniform vec2 cropY;\n';
+  t += 'uniform vec2 cropZ;\n';
+  
   t += 'uniform bool scalarsReplaceMode;\n';
   t += 'uniform float scalarsMin;\n';
   t += 'uniform float scalarsMax;\n';
@@ -147,6 +153,22 @@ X.shaders = function() {
   // the point color here
   t += '      }\n';
   t += '    }\n';
+
+  // discard segments which have a part outside of the use-defined cuboid
+  t += '    if (useCuboidCropping) {\n';
+
+  t += '      if (vertexPosition[0]<cropX[0] || vertexPosition[0]>cropX[1]) {\n';
+  t += '          fDiscardNow = 1.0;\n';
+  t += '      }\n';
+  t += '      if (vertexPosition[1]<cropY[0] || vertexPosition[1]>cropY[1]) {\n';
+  t += '        fDiscardNow = 1.0;\n';
+  t += '      }\n';
+  t += '      if (vertexPosition[2]<cropZ[0] || vertexPosition[2]>cropZ[1]) {\n';
+  t += '        fDiscardNow = 1.0;\n';
+  t += '      }\n';
+  t += '    }\n';
+  
+
   t += '  } else if (useObjectColor) {\n';
   t += '    fragmentColor = objectColor;\n';
   t += '  } else {\n';
@@ -323,6 +345,10 @@ X.shaders.uniforms = {
   SCALARSMINTHRESHOLD: 'scalarsMinThreshold',
   SCALARSMAXTHRESHOLD: 'scalarsMaxThreshold',
   SCALARSINTERPOLATION: 'scalarsInterpolation',
+  USECUBOIDCROPPING: 'useCuboidCropping',  
+  CROPX: 'cropX',  
+  CROPY: 'cropY',  
+  CROPZ: 'cropZ',  
   POINTSIZE: 'pointSize',
   OBJECTOPACITY: 'objectOpacity',
   NORMAL: 'normal',
