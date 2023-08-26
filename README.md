@@ -1,3 +1,10 @@
+# Fork of https://github.com/xtk/X 
+
+Purpose: to test implementing an extension to only render fibers contained within a user-defined volume.
+<br>
+
+---
+
 <a href="http://twitter.com/goxtk" target="_blank"><img src="http://xtk.github.io/twitter3.png"></a>
 
 # The X Toolkit: <i>WebGL&trade; for Scientific Visualization</i>
