@@ -237,7 +237,7 @@ X.parserTRK.prototype.parse = function(container, object, data, flag) {
   } // end of loop through all tracks
 
   // bounding box of the whole .trk file in world space coordinate 
-  object._bbox = [minX, maxX, minY, maxY, minZ, maxZ];
+  var boundingBox = [minX, maxX, minY, maxY, minZ, maxZ];
   
   // calculate the center based on the bounding box of the whole .trk file
   var centerX = (minX + maxX) / 2;
@@ -342,6 +342,8 @@ X.parserTRK.prototype.parse = function(container, object, data, flag) {
   // discard!
   scalars._dirty = true;
   object._scalars = scalars;
+
+  object._boundingBox = boundingBox;
 
   // make sure the vox_to_ras is not null. Else, set to identity
   var vox_to_ras_defined = false;

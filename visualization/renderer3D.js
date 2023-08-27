@@ -1828,12 +1828,12 @@ X.renderer3D.prototype.render_ = function(picking, invoked) {
 
       }
 
-      if (object.useCuboidCropping) {
+      if (object._useCuboidCropping) {
         // activate the useCuboidCropping flag on the shader
         this._context.uniform1i(uUseCuboidCropping, true);
-        this._context.uniform2f(uCropX, object.crop.xMin, object.crop.xMax);
-        this._context.uniform2f(uCropY, object.crop.yMin, object.crop.yMax);
-        this._context.uniform2f(uCropZ, object.crop.zMin, object.crop.zMax);
+        this._context.uniform2f(uCropX, object._crop[0], object._crop[1]);
+        this._context.uniform2f(uCropY, object._crop[2], object._crop[3]);
+        this._context.uniform2f(uCropZ, object._crop[4], object._crop[5]);
       } else {
         this._context.uniform1i(uUseCuboidCropping, false);
       }

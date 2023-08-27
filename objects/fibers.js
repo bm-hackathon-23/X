@@ -58,6 +58,97 @@ X.fibers = function() {
   // inject functionality
   inject(this, new X.loadable()); // this object is loadable from a file
   
+
+  /**
+   * The bounding box.
+   * 
+   * @type {!Array}
+   * @protected
+   */  
+  this._boundingBox = [0, 0, 0, 0, 0, 0];
+
+
+  
+  /**
+   * 
+   * 
+   * @type {boolean}
+   * @protected
+   */  
+  this._useCuboidCropping = false;
+
+
+  /**
+   * The cropping cuboid box.
+   * 
+   * @type {!Array}
+   * @protected
+   */  
+  this._crop = [0, 0, 0, 0, 0, 0];
+
+/**
+ * Get the bounding box of this fibers.
+ * 
+ * @return {!Array} The bounding box as an array [minX, maxX, minY, maxY, minZ, maxZ].
+ * @public
+ */
+X.fibers.prototype.__defineGetter__('boundingBox', function() {
+
+  return this._boundingBox;
+  
+});
+
+
+/**
+ * 
+ * 
+ * @return {boolean} 
+ * @public
+ */
+X.fibers.prototype.__defineGetter__('useCuboidCropping', function() {
+
+  return this._useCuboidCropping;
+  
+});
+
+/**
+ * 
+ *
+ * @param {boolean} .
+ */
+X.fibers.prototype.__defineSetter__('useCuboidCropping', function(useCuboidCropping) {
+
+  this._useCuboidCropping = useCuboidCropping;
+
+});
+
+
+
+/**
+ * Get the cropping volume box.
+ * 
+ * @return {!Array} The cropping volume box as an array [minX, maxX, minY, maxY, minZ, maxZ].
+ * @public
+ */
+X.fibers.prototype.__defineGetter__('crop', function() {
+
+  return this._crop;
+  
+});
+
+
+/**
+ * Set the cropping volume box.
+ * 
+ * @param {!Array} The cropping volume box as an array [minX, maxX, minY, maxY, minZ, maxZ].
+ * @public
+ */
+X.fibers.prototype.__defineSetter__('crop', function(crop) {
+  this._crop = crop.slice();
+});
+
+
+
 };
 // inherit from X.object
 goog.inherits(X.fibers, X.object);
