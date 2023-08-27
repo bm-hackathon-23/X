@@ -448,7 +448,7 @@ X.renderer3D.prototype.addShaders = function(shaders) {
   if (!this._context.getShaderParameter(_glFragmentShader,
       this._context.COMPILE_STATUS)) {
 
-    throw new Error('Fragement Shader compilation failed!\n' +
+    throw new Error('Fragment Shader compilation failed!\n' +
         this._context.getShaderInfoLog(_glFragmentShader));
 
   }
